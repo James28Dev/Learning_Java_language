@@ -42,7 +42,7 @@ public class GasolineCalculation {
         System.out.println("\t1 : Diesel");
     }
 
-    static void printGasType(int carType) {
+    static void printGasTypeOfCar(int carType) {
         switch (carType) {
             case 1:
                 printGasSedan();
@@ -52,122 +52,129 @@ public class GasolineCalculation {
                 break;
         }
     }
-
-    static double printReceiptAndTax(int menu, int brand, int carType, int gasType, double totalAmount) {
-        double amount = 0, litre = 0, tax = 0;
-        System.out.println("\t------------------------------------------------");
+    
+    static String printHeadGasStation(int brand) {
         switch (brand) {
             case 1:
-                System.out.println("\tPTT Gas Station");
-                break;
+                return "PTT Gas Station";
             case 2:
-                System.out.println("\tBCP Gas Station");
-                break;
+                return "BCP Gas Station";
             case 3:
-                System.out.println("\tShell Gas Station");
-                break;
+                return "Shell Gas Station";
             case 4:
-                System.out.println("\tEsso Gas Station");
-                break;
+                return "Esso Gas Station";
             default:
-                System.out.println("\tEmpty");
+                return "Empty";
         }
+    }
+    
+    static String printHeadReceiptAndTax(int menu) {
         switch (menu) {
-            case 1:
-                System.out.println("\tReceipt");
-                break;
             case 2:
-                System.out.println("\tTax Invoice");
-                break;
-        }
-        System.out.println("\t------------------------------------------------");
-        tax = totalAmount * 0.07;
-        amount = totalAmount - tax;
-        if (brand == 1) {
-            if (carType == 1 && gasType == 1) {
-                litre = amount / ptt[0];
-                System.out.printf("\tGasohol-95\t");
-            } else if (carType == 1 && gasType == 2) {
-                litre = amount / ptt[1];
-                System.out.print("\tGasohol-91\t");
-            } else if (carType == 1 && gasType == 3) {
-                litre = amount / ptt[2];
-                System.out.print("\tBenzin-91\t");
-            } else if (carType == 2 && gasType == 1) {
-                litre = amount / ptt[3];
-                System.out.print("\tDiesel\t\t");
-            }
-        } else if (brand == 2) {
-            if (carType == 1 && gasType == 1) {
-                litre = amount / bcp[0];
-                System.out.printf("\tGasohol-95\t");
-            } else if (carType == 1 && gasType == 2) {
-                litre = amount / bcp[1];
-                System.out.print("\tGasohol-91\t");
-            } else if (carType == 1 && gasType == 3) {
-                litre = amount / bcp[2];
-                System.out.print("\tBenzin-91\t");
-            } else if (carType == 2 && gasType == 1) {
-                litre = amount / bcp[3];
-                System.out.print("\tDiesel\t\t");
-            }
-        } else if (brand == 3) {
-            if (carType == 1 && gasType == 1) {
-                litre = amount / shell[0];
-                System.out.printf("\tGasohol-95\t");
-            } else if (carType == 1 && gasType == 2) {
-                litre = amount / shell[1];
-                System.out.print("\tGasohol-91\t");
-            } else if (carType == 1 && gasType == 3) {
-                litre = amount / shell[2];
-                System.out.print("\tBenzin-91\t");
-            } else if (carType == 2 && gasType == 1) {
-                litre = amount / shell[3];
-                System.out.print("\tDiesel\t\t");
-            }
-        } else if (brand == 4) {
-            if (carType == 1 && gasType == 1) {
-                litre = amount / esso[0];
-                System.out.printf("\tGasohol-95\t");
-            } else if (carType == 1 && gasType == 2) {
-                litre = amount / esso[1];
-                System.out.print("\tGasohol-91\t");
-            } else if (carType == 1 && gasType == 3) {
-                litre = amount / esso[2];
-                System.out.print("\tBenzin-91\t");
-            } else if (carType == 2 && gasType == 1) {
-                litre = amount / esso[3];
-                System.out.print("\tDiesel\t\t");
-            }
-        } else {
-            System.out.print("\tEmpty\t\t");
-        }
-        String formattedLitre = String.format("%.1f", litre);
-        String formattedAmount = String.format("%.1f", amount);
-        String formattedTax = String.format("%.1f", tax);
-        String formattedTotalAmount = String.format("%.1f", totalAmount);
-        System.out.println(formattedLitre + " Litre\t" + formattedTotalAmount + " Bath");
-        System.out.println("\t------------------------------------------------");
-        switch (menu) {
+                return "Receipt";
             case 3:
-                System.out.println("\tAmount : " + formattedAmount);
-                System.out.println("\tVAT 7% : " + formattedTax);
-                System.out.println("\ttotal amonut : " + formattedTotalAmount);
-                break;
+                return "Tax Invoice";
+            default:
+                return "Empty";
+        }
+    }
+
+    static String printGasType(int carType, int gasType) {
+        //String strGasType;
+        switch (carType) {
+            case 1:
+                switch (gasType) {
+                    case 1:
+                        return "Gasohol 95";
+                    case 2:
+                        return "Gasohol 91";
+                    case 3:
+                        return "Benzin 91";
+                }
+            case 2:
+                return "Diesel";
+            default:
+                return "Empty";
+        }
+    }
+    
+    static double calculatorLitre(int brand, int carType, int gasType, double amount) {
+        switch (brand) {
+            case 1:
+                switch (carType) {
+                    case 1:
+                        switch (gasType) {
+                            case 1:
+                                return amount / ptt[0];
+                            case 2:
+                                return amount / ptt[1];
+                            case 3:
+                                return amount / ptt[2];
+                        }
+                    case 2:
+                        return amount / ptt[3];
+                }
+            case 2:
+                switch (carType) {
+                    case 1:
+                        switch (gasType) {
+                            case 1:
+                                return amount / bcp[0];
+                            case 2:
+                                return amount / bcp[1];
+                            case 3:
+                                return amount / bcp[2];
+                        }
+                    case 2:
+                        return amount / bcp[3];
+                }
+            case 3:
+                switch (carType) {
+                    case 1:
+                        switch (gasType) {
+                            case 1:
+                                return amount / shell[0];
+                            case 2:
+                                return amount / shell[1];
+                            case 3:
+                                return amount / shell[2];
+                        }
+                    case 2:
+                        return amount / shell[3];
+                }
+            case 4:
+                switch (carType) {
+                    case 1:
+                        switch (gasType) {
+                            case 1:
+                                return amount / esso[0];
+                            case 2:
+                                return amount / esso[1];
+                            case 3:
+                                return amount / esso[2];
+                        }
+                    case 2:
+                        return amount / esso[3];
+                }
         }
         return 0;
     }
 
     public static void main(String[] args) {
         int i = 1, brand = 0, carType = 0, gasType = 0;
-        double totalAmount = 0;
+        double tax, amount, totalAmount = 0;
+        String strLitre, formattedAmount, formattedTax, formattedTotalAmount;
+        
         Scanner sc = new Scanner(System.in);
+        
         System.out.println("Gasoline Calculation");
         System.out.println("Program is created by Thanaphat");
+        
         do {
             printMainMenu();
             System.out.print("Please Enter Menu [0-3] : ");
             int menu = sc.nextInt();
+            
             switch (menu) {
                 case 0:
                     i++;
@@ -178,24 +185,57 @@ public class GasolineCalculation {
                         System.out.print("\tPlease Select Petrol Brand : ");
                         brand = sc.nextInt();
                     } while (brand < 1 || brand > 4);
+                    
                     do {
                         printCarType();
                         System.out.print("\tPlease Enter Car Type : ");
                         carType = sc.nextInt();
                     } while (carType < 1 || carType > 2);
                     do {
-                        printGasType(carType);
+                        printGasTypeOfCar(carType);
                         System.out.print("\tPlease Enter Gas Type : ");
                         gasType = sc.nextInt();
                     } while ((carType == 1 && (gasType < 1 || gasType > 3)) || (carType == 2 && (gasType < 1 || gasType > 1)));
+                    
                     System.out.print("\tPlease Enter Amount : ");
                     totalAmount = sc.nextDouble();
                     break;
                 case 2:
-                    printReceiptAndTax(menu, brand, carType, gasType, totalAmount);
+                    System.out.println("\t------------------------------------------------");
+                    printHeadGasStation(brand);
+                    printHeadReceiptAndTax(menu);
+                    System.out.println("\t" + printHeadGasStation(brand)+ "\n\t" + printHeadReceiptAndTax(menu));
+                    System.out.println("\t------------------------------------------------");
+                    
+                    tax = totalAmount * 0.07;
+                    amount = totalAmount - tax;
+                    
+                    printGasType(carType, gasType);
+                    strLitre = String.format("%.1f", calculatorLitre(brand, carType, gasType, amount));
+                    System.out.println("\t" + printGasType(carType, gasType) + "\t" + strLitre + " litre\t" + totalAmount + " Bath");
+                    System.out.println("\t------------------------------------------------");
                     break;
                 case 3:
-                    printReceiptAndTax(menu, brand, carType, gasType, totalAmount);
+                    System.out.println("\t------------------------------------------------");
+                    printHeadGasStation(brand);
+                    printHeadReceiptAndTax(menu);
+                    System.out.println("\t" + printHeadGasStation(brand)+ "\n\t" + printHeadReceiptAndTax(menu));
+                    System.out.println("\t------------------------------------------------");
+                    
+                    tax = totalAmount * 0.07;
+                    amount = totalAmount - tax;
+                    
+                    printGasType(carType, gasType);
+                    formattedAmount = String.format("%.0f", amount);
+                    formattedTax = String.format("%.0f", tax);
+                    formattedTotalAmount = String.format("%.2f", totalAmount);
+                    
+                    strLitre = String.format("%.1f", calculatorLitre(brand, carType, gasType, amount));
+                    System.out.println("\t" + printGasType(carType, gasType) + "\t" + strLitre + " litre\t" + totalAmount + " Bath");
+                    System.out.println("\t------------------------------------------------");
+                    System.out.println("\tAmount : " + formattedAmount);
+                    System.out.println("\tVAT 7% : " + formattedTax);
+                    System.out.println("\ttotal amonut : " + formattedTotalAmount);
                     break;
             }
         } while (i == 1);
