@@ -52,7 +52,7 @@ public class GasolineCalculation {
                 break;
         }
     }
-    
+
     static String printHeadGasStation(int brand) {
         switch (brand) {
             case 1:
@@ -67,7 +67,7 @@ public class GasolineCalculation {
                 return "Empty";
         }
     }
-    
+
     static String printHeadReceiptAndTax(int menu) {
         switch (menu) {
             case 2:
@@ -97,7 +97,7 @@ public class GasolineCalculation {
                 return "Empty";
         }
     }
-    
+
     static double calculatorLitre(int brand, int carType, int gasType, double amount) {
         switch (brand) {
             case 1:
@@ -164,17 +164,17 @@ public class GasolineCalculation {
         int i = 1, brand = 0, carType = 0, gasType = 0;
         double tax, amount, totalAmount = 0;
         String strLitre, formattedAmount, formattedTax, formattedTotalAmount;
-        
+
         Scanner sc = new Scanner(System.in);
-        
+
         System.out.println("Gasoline Calculation");
         System.out.println("Program is created by Thanaphat");
-        
+
         do {
             printMainMenu();
             System.out.print("Please Enter Menu [0-3] : ");
             int menu = sc.nextInt();
-            
+
             switch (menu) {
                 case 0:
                     i++;
@@ -185,7 +185,7 @@ public class GasolineCalculation {
                         System.out.print("\tPlease Select Petrol Brand : ");
                         brand = sc.nextInt();
                     } while (brand < 1 || brand > 4);
-                    
+
                     do {
                         printCarType();
                         System.out.print("\tPlease Enter Car Type : ");
@@ -196,7 +196,7 @@ public class GasolineCalculation {
                         System.out.print("\tPlease Enter Gas Type : ");
                         gasType = sc.nextInt();
                     } while ((carType == 1 && (gasType < 1 || gasType > 3)) || (carType == 2 && (gasType < 1 || gasType > 1)));
-                    
+
                     System.out.print("\tPlease Enter Amount : ");
                     totalAmount = sc.nextDouble();
                     break;
@@ -204,12 +204,12 @@ public class GasolineCalculation {
                     System.out.println("\t------------------------------------------------");
                     printHeadGasStation(brand);
                     printHeadReceiptAndTax(menu);
-                    System.out.println("\t" + printHeadGasStation(brand)+ "\n\t" + printHeadReceiptAndTax(menu));
+                    System.out.println("\t" + printHeadGasStation(brand) + "\n\t" + printHeadReceiptAndTax(menu));
                     System.out.println("\t------------------------------------------------");
-                    
+
                     tax = totalAmount * 0.07;
                     amount = totalAmount - tax;
-                    
+
                     printGasType(carType, gasType);
                     strLitre = String.format("%.1f", calculatorLitre(brand, carType, gasType, amount));
                     System.out.println("\t" + printGasType(carType, gasType) + "\t" + strLitre + " litre\t" + totalAmount + " Bath");
@@ -219,17 +219,17 @@ public class GasolineCalculation {
                     System.out.println("\t------------------------------------------------");
                     printHeadGasStation(brand);
                     printHeadReceiptAndTax(menu);
-                    System.out.println("\t" + printHeadGasStation(brand)+ "\n\t" + printHeadReceiptAndTax(menu));
+                    System.out.println("\t" + printHeadGasStation(brand) + "\n\t" + printHeadReceiptAndTax(menu));
                     System.out.println("\t------------------------------------------------");
-                    
+
                     tax = totalAmount * 0.07;
                     amount = totalAmount - tax;
-                    
+
                     printGasType(carType, gasType);
                     formattedAmount = String.format("%.0f", amount);
                     formattedTax = String.format("%.0f", tax);
                     formattedTotalAmount = String.format("%.2f", totalAmount);
-                    
+
                     strLitre = String.format("%.1f", calculatorLitre(brand, carType, gasType, amount));
                     System.out.println("\t" + printGasType(carType, gasType) + "\t" + strLitre + " litre\t" + totalAmount + " Bath");
                     System.out.println("\t------------------------------------------------");
