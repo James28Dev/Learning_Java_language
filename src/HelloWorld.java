@@ -2,7 +2,7 @@
 public class HelloWorld {
 
     static String checkBirthday(int day) {       
-        String strDay = "", warn;
+        String strDay = "", warn = "";
         if (day >= 6) {
             warn = "is holiday.";
         } else {
