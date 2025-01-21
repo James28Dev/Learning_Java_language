@@ -1,5 +1,7 @@
 package chap3;
+
 public class Girl {
+
     String name;
     String phone;
 
@@ -7,9 +9,9 @@ public class Girl {
         this.name = name;
         this.phone = phone;
     }
-    
-    void print(){
-        System.out.println("Name : "+name);
-        System.out.println("PhoneNo : "+phone);
+
+    void print() {
+        System.out.println("Name : " + name);
+        System.out.println("PhoneNo : " + phone);
     }
 }
